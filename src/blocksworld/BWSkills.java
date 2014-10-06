@@ -1,9 +1,9 @@
 package blocksworld;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
-import util.Condition;
+import util.Goal;
 import util.Skill;
 import util.State;
 
@@ -26,29 +26,29 @@ public class BWSkills {
 			
 		}
 		
-		public Stack(String[] args) {
+		public Stack(ArrayList<String> args) {
 			super("Stack", args);
 
 			// Specify Precondition
-			this.precondition = new BWConcepts.Stackable(args);
+			this.precondition = new Goal("stackable", args);
 
 			// Specify effects
-			this.effects = new ArrayList<Condition>();
-			this.effects.add(new BWCondition("On", args));
-			this.effects.add(new BWCondition("HandEmpty", null));
+			this.effects = new ArrayList<Goal>();
+			this.effects.add(new Goal("on", args));
+			this.effects.add(new Goal("hand-empty", null));
 		}
 
 		@Override
 		public void execute(State state) {
-			BWState s = (BWState) state;
-			int index = s.getColumn().indexOf(args[0]) + 1;
-			if (s.getColumn().get(index) != null) {
-				// Shouldn't reach here because we must check pre-conditions
-				// before executing
-				throw new IllegalStateException();
-			}
-			s.getColumn().set(index, args[1]);
-			s.addConcept(new BWConcepts.HandEmpty(null));
+//			BWState s = (BWState) state;
+//			int index = s.getColumn().indexOf(args.get(0)) + 1;
+//			if (s.getColumn().get(index) != null) {
+//				// Shouldn't reach here because we must check pre-conditions
+//				// before executing
+//				throw new IllegalStateException();
+//			}
+//			s.getColumn().set(index, args.get(1));
+//			s.addConcept(new BWConcepts.HandEmpty(null));
 		}
 
 		@Override
@@ -69,31 +69,29 @@ public class BWSkills {
 			
 		}
 		
-		public UnStack(String[] args) {
+		public UnStack(ArrayList<String> args) {
 			super("UnStack", args);
 
 			// Specify Precondition
-			this.precondition = new BWConcepts.UnStackable(args);
+			this.precondition = new Goal("unstackable", args);
 
 			// Specify effects
-			this.effects = new ArrayList<Condition>();
-			this.effects.add(new BWCondition("Clear", Arrays.copyOfRange(args,
-					1, 2)));
-			this.effects.add(new BWCondition("Holding", Arrays.copyOfRange(
-					args, 0, 1)));
+			this.effects = new ArrayList<Goal>();
+			this.effects.add(new Goal("clear", args.subList(1, 2)));
+			this.effects.add(new Goal("holding", args.subList(0, 1)));
 		}
 
 		@Override
 		public void execute(State state) {
-			BWState s = (BWState) state;
-			int index = s.getColumn().indexOf(args[0]);
-			if (s.getColumn().get(index + 1) != null) {
-				// Shouldn't reach here because we must check pre-conditions
-				// before executing
-				throw new IllegalStateException();
-			}
-			s.getColumn().set(index, null);
-			s.removeConcept(new BWConcepts.HandEmpty(null));
+//			BWState s = (BWState) state;
+//			int index = s.getColumn().indexOf(args.get(0));
+//			if (s.getColumn().get(index + 1) != null) {
+//				// Shouldn't reach here because we must check pre-conditions
+//				// before executing
+//				throw new IllegalStateException();
+//			}
+//			s.getColumn().set(index, null);
+//			s.removeConcept(new BWConcepts.HandEmpty(null));
 		}
 
 		@Override
@@ -114,27 +112,34 @@ public class BWSkills {
 		public PutDown(){
 			
 		}
-		public PutDown(String[] args) {
+		public PutDown(ArrayList<String> args) {
 			super("PutDown", args);
 
 			// Specify Precondition
-			this.precondition = new BWConcepts.PutDownable(args);
+			this.precondition = new Goal("putdownable", args);
 
 			// Specify Effects
-			this.effects = new ArrayList<Condition>();
-			this.effects.add(new BWCondition("HandEmpty", null));
+			this.effects = new ArrayList<Goal>();
+			this.effects.add(new Goal("hand-empty", null));
 		}
 
 		@Override
 		public void execute(State state) {
-			BWState s = (BWState) state;
-			s.addConcept(new BWConcepts.HandEmpty(null));
+//			BWState s = (BWState) state;
+//			s.addConcept(new BWConcepts.HandEmpty(null));
 		}
 
 		@Override
 		public void checkPrecondition(State state) {
 			// TODO Auto-generated method stub
-
+		}
+		
+		@Override
+		public Goal getPrecondition(){
+		    if (args.get(1).charAt(0) == 'T'){
+		        return new Goal("holding", args.subList(0, 1));
+		    }
+		    return this.precondition;
 		}
 	}
 }

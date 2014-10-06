@@ -1,5 +1,6 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,13 +12,13 @@ import java.util.List;
 public abstract class Skill {
 
 	protected String name;
-	protected String[] args;
+	protected ArrayList<String> args;
 
 	// Defines the single condition at which the skill can be executed.
-	protected Concept precondition;
+	protected Goal precondition;
 
 	// Defines the set of effects of the skill
-	protected List<Condition> effects;
+	protected List<Goal> effects;
 
 	// List of sub skills that needs to be executed in order.
 	protected List<Skill> subSkills;
@@ -26,7 +27,7 @@ public abstract class Skill {
 		
 	}
 	
-	public Skill(String name, String[] args) {
+	public Skill(String name, ArrayList<String> args) {
 		this.name = name;
 		this.args = args;
 	}
@@ -35,11 +36,11 @@ public abstract class Skill {
 
 	public abstract void checkPrecondition(State state);
 	
-	public List<Condition> getEffects(){
+	public List<Goal> getEffects(){
 		return effects;
 	}
 	
-	public Concept getPrecondition(){
+	public Goal getPrecondition(){
 		return precondition;
 	}
 

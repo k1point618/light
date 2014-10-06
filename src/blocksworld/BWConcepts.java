@@ -6,46 +6,45 @@ import java.util.Arrays;
 import util.ComplexConcept;
 import util.Concept;
 import util.Condition;
-import util.PrimitiveConcept;
 
 public class BWConcepts {
 
-	public static class On extends PrimitiveConcept {
+	public static class On extends Concept {
 
 		public On() {
 		}
 
 		public On(String[] args) {
-			super("On", args);
+			super("on", args);
 			// Set the condition
-			this.setCondition(new BWCondition("On", args));
+			this.setCondition(new BWCondition("on", args));
 		}
 
 	}
 
-	public static class Clear extends PrimitiveConcept {
+	public static class Clear extends Concept {
 
 		public Clear() {
 		}
 
 		public Clear(String[] args) {
-			super("Clear", args);
+			super("clear", args);
 			// Set the condition
-			this.setCondition(new BWCondition("Clear", args));
+			this.setCondition(new BWCondition("clear", args));
 
 		}
 
 	}
 
-	public static class HandEmpty extends PrimitiveConcept {
+	public static class HandEmpty extends Concept {
 
 		public HandEmpty() {
 		}
 
 		public HandEmpty(String[] args) {
-			super("HandEmpty", args);
+			super("hand-empty", args);
 			// Set the condition
-			this.setCondition(new BWCondition("HandEmpty", args));
+			this.setCondition(new BWCondition("hand-empty", args));
 		}
 
 	}
@@ -56,7 +55,11 @@ public class BWConcepts {
 		}
 
 		public UnStackable(String[] args) {
-			super("UnStackable", args);
+			super("unstackable", args);
+			
+			// Set the condition
+			this.setCondition(new BWCondition("unstackable", args));
+			
 			// Define the positives
 			this.positives = new ArrayList<Concept>();
 			this.positives.add(new BWConcepts.On(args));
@@ -72,7 +75,7 @@ public class BWConcepts {
 		}
 
 		public Stackable(String[] args) {
-			super("Stackable", args);
+			super("stackable", args);
 			// Define the positives
 			this.positives = new ArrayList<Concept>();
 			// TODO: fill in
@@ -84,7 +87,7 @@ public class BWConcepts {
 		}
 
 		public PutDownable(String[] args) {
-			super("PutDownable", args);
+			super("putdownable", args);
 			this.positives = new ArrayList<Concept>();
 			// TODO: fill in
 

@@ -4,6 +4,7 @@ public abstract class Concept {
 
 	protected String name;
 	protected String[] args;
+	protected Condition condition;
 
 	public Concept() {
 
@@ -18,6 +19,13 @@ public abstract class Concept {
 		this.name = name;
 		this.args = args;
 	}
+	
+	public void setCondition(Condition cond){
+	    this.condition = cond;
+	}
 
+	public Condition getCondition(){
+	    return this.condition;
+	}
 	
 }

@@ -11,17 +11,21 @@ import java.util.List;
  */
 public abstract class State {
 
-	private List<Concept> positives;
+	private List<Goal> positives;
 
 	public State() {
-		positives = new ArrayList<Concept>();
+		positives = new ArrayList<Goal>();
 	}
 
-	public boolean addConcept(Concept newC) {
+	public boolean addConcept(Goal newC) {
 		return positives.add(newC);
 	}
 
-	public boolean removeConcept(Concept oldC) {
+	public boolean removeConcept(Goal oldC) {
 		return positives.remove(oldC);
+	}
+	
+	public List<Goal> getConcepts(){
+	    return positives;
 	}
 }
